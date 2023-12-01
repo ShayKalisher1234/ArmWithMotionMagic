@@ -4,20 +4,22 @@
 
 package frc.robot.commands;
 
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsystem;
 
 public class MotorPosition extends CommandBase {
-  
-private ArmSubsystem arm = ArmSubsystem.getInstance();
-double position;
-  
+
+  private ArmSubsystem arm = ArmSubsystem.getInstance();
+  Timer timer;
+  double position;
 
   /** Creates a new MotorPosition. */
   public MotorPosition(double position) {
     this.addRequirements(arm);
-
+    this.timer.start();
+    
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -25,32 +27,36 @@ double position;
   @Override
   public void initialize() {
     this.arm.putArmInPosMM(position);
-    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    }
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     arm.setSpeed(0);
 
-    
   }
 
   // Returns true when the command should end.
-  @Override 
-  public boolean isFinished() 
-  {
-    
-    if (position == arm.getMotorPosition()){
-      return true;
-    
-  }
-  return false;
+  @Override
+  public boolean isFinished() {
+
+    if ((arm.getMotorPosition() > this.position - Constants.ArmConstants.DifferenceFromPosition)
+        && (arm.getMotorPosition() < this.position + Constants.ArmConstants.DifferenceFromPosition)) {
+
+      return this.timer.hasElapsed(Constants.ArmConstants.timeInPosition);
+
+    } else {
+      this.timer.restart();
+      return false;
+
+    }
+
   }
 }

@@ -33,6 +33,8 @@ public final class Constants {
     public static final double PeakReverseVoltage = -11.5;
     public static final double PeakForwardVoltage = 11.5;
     public static final double Feedback = 50;
+    public static final double DifferenceFromPosition = 0.02;
+    public static double timeInPosition = 3;
     
   }
 }
