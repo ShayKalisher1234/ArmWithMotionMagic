@@ -18,7 +18,7 @@ public class ArmSubsystem extends SubsystemBase {
   private final MotionMagicVoltage motionMagic = new MotionMagicVoltage(0);
 
   /** Creates a new ArmSubsystem. */
-  public ArmSubsystem() {
+  private ArmSubsystem() {
     this.motor = new TalonFX(Constants.ArmConstants.KMotorID);
 
     TalonFXConfiguration configs = new TalonFXConfiguration();
