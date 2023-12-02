@@ -9,14 +9,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsystem;
 
-public class MotorPosition extends CommandBase {
+public class MotorPositionMM extends CommandBase {
 
   private ArmSubsystem arm = ArmSubsystem.getInstance();
   Timer timer;
   double position;
 
   /** Creates a new MotorPosition. */
-  public MotorPosition(double position) {
+  public MotorPositionMM(double position) {
+    timer = new Timer();
     this.addRequirements(arm);
     this.timer.start();
     
