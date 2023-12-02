@@ -46,7 +46,7 @@ public class MotorPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(arm.getMotorPosition() - this.position) < Constants.ArmConstants.DifferenceFromPosition){
+    if (Math.abs(arm.getMotorPosition() - this.position) > Constants.ArmConstants.DifferenceFromPosition){
       this.timer.restart();
     }
       return this.timer.hasElapsed(Constants.ArmConstants.timeInPosition);
